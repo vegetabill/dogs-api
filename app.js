@@ -1,11 +1,16 @@
+/* eslint-disable no-console */
+// 3p packages
 const express = require('express');
 const morgan = require('morgan');
+const pgp = require('pg-promise')();
+
+// files in this repo
 const { printRoutes } = require('./src/utils');
 const BreedsTable = require('./src/breeds-table');
 
+// Config
 const DEFAULT_DB_NAME = 'dogs-dev';
 const DB_NAME = process.env.DB_NAME || DEFAULT_DB_NAME;
-const pgp = require('pg-promise')();
 const db = pgp(`postgres://postgres@localhost:5432/${DB_NAME}`);
 
 const breeds = new BreedsTable(db);
@@ -23,5 +28,6 @@ app.route('/breeds').get((req, res) => {
 // Test the DB connection before starting the server
 breeds.sanityCheck().then(() => {
   app.listen(PORT, () => console.log(`Listening on port ${PORT}`));
+  // eslint-disable-next-line no-underscore-dangle
   printRoutes(`http://localhost:${PORT}`, app._router.stack);
 });
