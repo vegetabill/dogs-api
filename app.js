@@ -11,7 +11,8 @@ const BreedsTable = require('./src/breeds-table');
 // Config
 const DEFAULT_DB_NAME = 'dogs-dev';
 const DB_NAME = process.env.DB_NAME || DEFAULT_DB_NAME;
-const db = pgp(`postgres://postgres@localhost:5432/${DB_NAME}`);
+const connectionString = `postgres://postgres@localhost:5432/${DB_NAME}`;
+const db = pgp(connectionString);
 
 const breeds = new BreedsTable(db);
 
@@ -26,6 +27,8 @@ app.route('/breeds').get((req, res) => {
 });
 
 // Test the DB connection before starting the server
+console.log('DB connectionString => ', connectionString);
+
 breeds.sanityCheck().then(() => {
   app.listen(PORT, () => console.log(`Listening on port ${PORT}`));
   // eslint-disable-next-line no-underscore-dangle

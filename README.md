@@ -13,7 +13,12 @@ Like all Node apps, start with `npm install` to install necessary dependencies.
 #### Database
 
 - [Install Postgres database](https://github.com/Techtonica/curriculum/blob/master/databases/installing-postgresql.md)
-- Load schema and seed data with ``
 
+Load schema and seed data
+
+```
+createdb dogs-dev
+psql dogs-dev < db.sql
+```
 
 ## How to Run API Tests
