@@ -1,0 +1,33 @@
+{
+  "name": "dogs-api",
+  "version": "1.0.0",
+  "description": "This is a limited reference implementation with API tests. It does not have a web UI.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "server": "node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vegetabill/dogs-api.git"
+  },
+  "keywords": [],
+  "author": "@vegetabill",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/vegetabill/dogs-api/issues"
+  },
+  "homepage": "https://github.com/vegetabill/dogs-api#readme",
+  "dependencies": {
+    "cli-table": "^0.3.1",
+    "express": "^4.17.1",
+    "morgan": "^1.9.1",
+    "pg-promise": "^10.4.4"
+  },
+  "devDependencies": {
+    "eslint": "^6.8.0",
+    "eslint-config-prettier": "^6.10.0",
+    "eslint-plugin-prettier": "^3.1.2",
+    "prettier": "^1.19.1"
+  }
+}
