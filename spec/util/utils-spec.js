@@ -1,4 +1,4 @@
-const { camelize } = require('../src/utils');
+const { camelize } = require('../../src/util/utils');
 
 describe('camelize', () => {
   it('should camelize a one-level object', () => {

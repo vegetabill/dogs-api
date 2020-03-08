@@ -4,10 +4,10 @@ const express = require('express');
 const morgan = require('morgan');
 const pgp = require('pg-promise')();
 const pretty = require('express-prettify');
+const bodyParser = require('body-parser');
 
 // project modules
 const { setupApp } = require('./src/app');
-const { printRoutes } = require('./src/utils');
 
 // Config
 const DEFAULT_DB_NAME = 'dogs-dev';
@@ -24,9 +24,8 @@ const app = express();
 app.use(morgan('dev'));
 // add ?pretty to any query to get pretty json
 app.use(pretty({ query: 'pretty' }));
+app.use(bodyParser.json());
 
 setupApp(app, db).then(() => {
   app.listen(PORT, () => console.log(`Listening on port ${PORT}`));
-  // eslint-disable-next-line no-underscore-dangle
-  printRoutes(`http://localhost:${PORT}`, app._router.stack);
 });

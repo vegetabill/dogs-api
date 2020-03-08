@@ -1,30 +1,9 @@
 /* eslint-disable no-console */
-const Table = require('cli-table');
 const camelCase = require('lodash/camelCase');
 const mapKeys = require('lodash/mapKeys');
 const mapValues = require('lodash/mapValues');
 const isArrayLikeObject = require('lodash/isArrayLikeObject');
 const isObject = require('lodash/isObject');
-
-// Based on:
-// https://stackoverflow.com/questions/14934452/how-to-get-all-registered-routes-in-express
-function printRoutes(baseUrl, routes) {
-  const table = new Table({ head: ['Verb', 'Path'] });
-  console.log(`\nAPI for ${baseUrl}`);
-  console.log('\n********************************************');
-
-  Object.values(routes)
-    .map(routeWrapper => routeWrapper.route)
-    .filter(route => route)
-    .forEach(route => {
-      table.push({
-        [route.stack[0].method.toUpperCase()]: [baseUrl + route.path]
-      });
-    });
-
-  console.log(table.toString());
-  return table;
-}
 
 function isJsonSupportedValue(value) {
   return !isObject(value) || value instanceof Date;
@@ -42,4 +21,4 @@ function camelize(object) {
   return mapValues(camelKeyed, v => (isJsonSupportedValue(v) ? v : camelize(v)));
 }
 
-module.exports = { printRoutes, camelize };
+module.exports = { camelize };

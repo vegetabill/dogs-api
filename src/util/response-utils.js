@@ -1,3 +1,5 @@
+const { camelize } = require('./utils');
+
 const createNotAllowedHandler = (allowedMethods = ['GET']) => {
   return (req, res) => {
     res
@@ -7,4 +9,8 @@ const createNotAllowedHandler = (allowedMethods = ['GET']) => {
   };
 };
 
-module.exports = { createNotAllowedHandler };
+const sendData = (res, data) => {
+  res.send(camelize(data));
+};
+
+module.exports = { createNotAllowedHandler, sendData };
