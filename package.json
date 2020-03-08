@@ -4,9 +4,9 @@
   "description": "This is a limited reference implementation with API tests. It does not have a web UI.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "server": "node app.js",
-    "lint": "eslint src/*.js app.js"
+    "test": "npx jasmin",
+    "lint": "eslint src/*.js app.js",
+    "start": "node index.js"
   },
   "repository": {
     "type": "git",
