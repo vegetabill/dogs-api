@@ -24,4 +24,9 @@ describe('camelize', () => {
       listOfSnakes: [{ arraySnake: 123 }]
     });
   });
+
+  it('should leave work fine with Date objects', () => {
+    const date = new Date('2020-03-08T20:34:05.832Z');
+    expect(camelize({ created_at: date })).toEqual({ createdAt: date });
+  });
 });

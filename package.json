@@ -4,7 +4,7 @@
   "description": "This is a limited reference implementation with API tests. It does not have a web UI.",
   "main": "index.js",
   "scripts": {
-    "test": "npx jasmin",
+    "test": "npx jasmine",
     "lint": "eslint src/*.js app.js",
     "start": "node index.js"
   },

@@ -26,6 +26,10 @@ function printRoutes(baseUrl, routes) {
   return table;
 }
 
+function isJsonSupportedValue(value) {
+  return !isObject(value) || value instanceof Date;
+}
+
 /**
  * Recursively camelize the keys of an object
  * @param {} object
@@ -35,7 +39,7 @@ function camelize(object) {
     return object.map(camelize);
   }
   const camelKeyed = mapKeys(object, (v, k) => camelCase(k));
-  return mapValues(camelKeyed, v => (isObject(v) ? camelize(v) : v));
+  return mapValues(camelKeyed, v => (isJsonSupportedValue(v) ? v : camelize(v)));
 }
 
 module.exports = { printRoutes, camelize };
