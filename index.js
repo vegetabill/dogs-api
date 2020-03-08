@@ -3,6 +3,7 @@
 const express = require('express');
 const morgan = require('morgan');
 const pgp = require('pg-promise')();
+const pretty = require('express-prettify');
 
 // project modules
 const { setupApp } = require('./src/app');
@@ -18,8 +19,11 @@ console.log('Postgres DB => ', connectionString);
 const DEFAULT_PORT = 3000;
 const PORT = process.env.PORT || DEFAULT_PORT;
 
+// Middlewares
 const app = express();
 app.use(morgan('dev'));
+// add ?pretty to any query to get pretty json
+app.use(pretty({ query: 'pretty' }));
 
 setupApp(app, db).then(() => {
   app.listen(PORT, () => console.log(`Listening on port ${PORT}`));
