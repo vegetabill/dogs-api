@@ -4,7 +4,7 @@ This is a limited reference implementation with API tests. It does not have a we
 
 ## How to Run Express Server
 
-`npm dev` will start the server in dev mode. Make sure database is loaded already.
+`npm start` will start the server in dev mode. Make sure database is loaded already.
 
 ### First Time Setup
 
@@ -17,8 +17,13 @@ Like all Node apps, start with `npm install` to install necessary dependencies.
 Load schema and seed data
 
 ```
-createdb dogs-dev
-psql dogs-dev < db.sql
+npm run db:create
 ```
 
+This will create the dev database called `dogs-dev`.
+
 ## How to Run API Tests
+
+`npm run test:api`
+
+This will create a dogs-api-test DB and run the API tests against it.

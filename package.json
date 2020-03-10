@@ -6,7 +6,10 @@
   "scripts": {
     "test": "npx jasmine",
     "lint": "eslint src/*.js app.js",
-    "start": "node index.js"
+    "start": "node index.js",
+    "test:api": "npm run db:test:create && DB_NAME=dogs-api-test npx jasmine spec/api-test.js",
+    "db:test:create": "dropdb --if-exists dogs-api-test && createdb dogs-api-test && psql dogs-api-test < db.sql",
+    "db:create": "dropdb --if-exists dogs-dev && createdb dogs-dev && psql dogs-dev < db.sql"
   },
   "repository": {
     "type": "git",
@@ -28,6 +31,7 @@
     "pg-promise": "^10.4.4"
   },
   "devDependencies": {
+    "chance": "^1.1.4",
     "eslint": "^6.8.0",
     "eslint-config-airbnb": "^18.0.1",
     "eslint-config-prettier": "^6.10.0",
@@ -36,6 +40,7 @@
     "eslint-plugin-prettier": "^3.1.2",
     "eslint-plugin-react": "^7.19.0",
     "jasmine": "^3.5.0",
-    "prettier": "^1.19.1"
+    "prettier": "^1.19.1",
+    "supertest-fetch": "^1.4.1"
   }
 }

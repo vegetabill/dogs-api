@@ -22,15 +22,21 @@ class OwnersTable {
   }
 
   findByLogin(login) {
-    return this.db.one('SELECT * FROM owners WHERE login = $1', login);
+    return this.db.oneOrNone('SELECT * FROM owners WHERE login = $1', login);
   }
 
   insert({ login, displayName }) {
-    return this.db.one(
+    return this.db.none(
       `INSERT INTO owners(login, display_name) 
-      VALUES($1, $2) RETURNING id`,
+      VALUES($1, $2)`,
       [login, displayName]
     );
+  }
+
+  delete(id) {
+    return this.db
+      .result('DELETE FROM owners WHERE id = $1', id)
+      .then(result => result.rowCount === 1);
   }
 
   update({ login, displayName }) {
@@ -40,20 +46,6 @@ class OwnersTable {
        WHERE login = $2`,
       [displayName, login]
     );
-  }
-
-  /**
-   *
-   * @returns true if create
-   */
-  async createOrUpdateByLogin(login, attrs) {
-    const existing = await this.findByLogin(login);
-    if (existing) {
-      this.update({ login, ...attrs });
-      return false;
-    }
-    await this.insert({ login, ...attrs });
-    return true;
   }
 }
 

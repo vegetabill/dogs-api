@@ -40,11 +40,11 @@ CREATE TABLE public.dogs (
     name text NOT NULL,
     birthdate date,
     created_at timestamp without time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
-    breed_id text,
     primary_color text,
     secondary_color text,
     photo_url text,
-    owner_id integer
+    owner_id integer,
+    breed text
 );
 
 
@@ -78,8 +78,9 @@ ALTER SEQUENCE public.dogs_id_seq OWNED BY public.dogs.id;
 
 CREATE TABLE public.owners (
     id integer NOT NULL,
-    name text NOT NULL,
-    created_at timestamp with time zone DEFAULT CURRENT_TIMESTAMP NOT NULL
+    display_name text NOT NULL,
+    created_at timestamp with time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    login text NOT NULL
 );
 
 
@@ -150,7 +151,9 @@ Yorkshire Terrier
 -- Data for Name: dogs; Type: TABLE DATA; Schema: public; Owner: bill
 --
 
-COPY public.dogs (id, name, birthdate, created_at, breed_id, primary_color, secondary_color, photo_url, owner_id) FROM stdin;
+COPY public.dogs (id, name, birthdate, created_at, primary_color, secondary_color, photo_url, owner_id, breed) FROM stdin;
+1	Osito	2006-09-13	2020-03-08 18:11:58.235349	Red Sable	\N	https://www.squishable.com/mm5/graphics/00000001/mini_squish_pomeranian_7.jpg	3	Pomeranian
+2	Oscuro	2006-09-13	2020-03-08 18:14:07.465324	Red Sable	\N	https://upload.wikimedia.org/wikipedia/en/b/be/Missile_Ghost_Trick.jpg	3	Pomeranian
 \.
 
 
@@ -158,7 +161,9 @@ COPY public.dogs (id, name, birthdate, created_at, breed_id, primary_color, seco
 -- Data for Name: owners; Type: TABLE DATA; Schema: public; Owner: bill
 --
 
-COPY public.owners (id, name, created_at) FROM stdin;
+COPY public.owners (id, display_name, created_at, login) FROM stdin;
+3	Bill D	2020-03-08 16:54:58.322663-07	bill
+4	Amy	2020-03-08 16:55:49.09451-07	amy-u
 \.
 
 
@@ -166,14 +171,14 @@ COPY public.owners (id, name, created_at) FROM stdin;
 -- Name: dogs_id_seq; Type: SEQUENCE SET; Schema: public; Owner: bill
 --
 
-SELECT pg_catalog.setval('public.dogs_id_seq', 1, false);
+SELECT pg_catalog.setval('public.dogs_id_seq', 3, true);
 
 
 --
 -- Name: owners_id_seq; Type: SEQUENCE SET; Schema: public; Owner: bill
 --
 
-SELECT pg_catalog.setval('public.owners_id_seq', 1, false);
+SELECT pg_catalog.setval('public.owners_id_seq', 4, true);
 
 
 --
@@ -198,6 +203,13 @@ ALTER TABLE ONLY public.dogs
 
 ALTER TABLE ONLY public.owners
     ADD CONSTRAINT owners_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: owners_unique_login; Type: INDEX; Schema: public; Owner: bill
+--
+
+CREATE UNIQUE INDEX owners_unique_login ON public.owners USING btree (login);
 
 
 --

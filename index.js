@@ -26,6 +26,14 @@ app.use(morgan('dev'));
 app.use(pretty({ query: 'pretty' }));
 app.use(bodyParser.json());
 
-setupApp(app, db).then(() => {
-  app.listen(PORT, () => console.log(`Listening on port ${PORT}`));
-});
+const apiBuilder = () => setupApp(app, db).then(() => app);
+
+if (require.main === module) {
+  apiBuilder().then(api => {
+    api.listen(PORT, () => console.log(`Listening on port ${PORT}`));
+  });
+} else {
+  module.exports = {
+    setupApp: apiBuilder
+  };
+}

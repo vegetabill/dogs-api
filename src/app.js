@@ -3,6 +3,7 @@ const DogsTable = require('./tables/dogs-table');
 const OwnersTable = require('./tables/owners-table');
 const buildOwnersRoutes = require('./routers/owners-router');
 const buildBreedsRoutes = require('./routers/breeds-router');
+const buildDogsRoutes = require('./routers/dogs-router');
 
 function setupApp(app, db) {
   // DB Tables
@@ -10,8 +11,9 @@ function setupApp(app, db) {
   const dogs = new DogsTable(db);
   const owners = new OwnersTable(db);
 
-  app.use('/owners', buildOwnersRoutes(owners));
+  app.use('/owners', buildOwnersRoutes(owners, dogs));
   app.use('/breeds', buildBreedsRoutes(breeds));
+  app.use('/dogs', buildDogsRoutes(dogs));
 
   return new Promise((resolve, reject) => {
     return Promise.all([breeds.sanityCheck(), dogs.sanityCheck(), owners.sanityCheck()])
