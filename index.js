@@ -16,7 +16,7 @@ const connectionString = `postgres://postgres@localhost:5432/${DB_NAME}`;
 const db = pgp(connectionString);
 console.log('Postgres DB => ', connectionString);
 
-const DEFAULT_PORT = 3000;
+const DEFAULT_PORT = 3001;
 const PORT = process.env.PORT || DEFAULT_PORT;
 
 // Middlewares
