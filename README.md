@@ -6,6 +6,13 @@ This is a limited reference implementation with API tests. It does not have a we
 
 `npm start` will start the server in dev mode. Make sure database is loaded already.
 
+### Learning the API
+
+- You can find swagger definition at `/swagger.json`
+- To see it as SwaggerUI
+  - setup the [Dogs React App repo](https://github.com/vegetabill/dogs-react-app)
+  - navigate to `http://localhost:3000/swagger`
+
 ### First Time Setup
 
 Like all Node apps, start with `npm install` to install necessary dependencies.

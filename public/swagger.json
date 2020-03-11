@@ -1,0 +1,28 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Pets API",
+    "version": "v1"
+  },
+  "consumes": ["application/json"],
+  "paths": {
+    "/owners": {
+      "get": {
+        "operationId": "getOwners",
+        "summary": "List all owners",
+        "produces": ["application/json"],
+        "responses": {
+          "200": {
+            "description": "Array of owner"
+          }
+        }
+      }
+    }
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3001",
+      "description": "local server"
+    }
+  ]
+}

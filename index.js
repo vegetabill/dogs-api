@@ -26,6 +26,8 @@ app.use(morgan('dev'));
 app.use(pretty({ query: 'pretty' }));
 app.use(bodyParser.json());
 
+app.use(express.static('public'));
+
 const apiBuilder = () => setupApp(app, db).then(() => app);
 
 if (require.main === module) {
